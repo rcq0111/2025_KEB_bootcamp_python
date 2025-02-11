@@ -1,38 +1,47 @@
-def my_pow(b, e):
+# Assignment Day 02
+# v1.4) Make my_pow custom function instead of ** operator, power function and make it work.
+
+def my_pow(b, e) -> float:
     """
-    밑과 지수를  입력 받아 거듭제곱을 한 결과를 실수 형태로 리턴 받는다.
-    :param b:
-    :param e:
-    :return:
+    A user-defined function that receives a base and exponent and returns the power result in the form of a real number
+    :param b: base number
+    :param e: exponent
+    :return: the power result in the form of a real number
     """
-    return b**e
+    result = 1
+    for k in range(e):
+        result = result * b
+    return result
 
 
+def is_prime(num) -> bool:
+    """
+    A function that returns True if it is a prime number and False if it is not a prime number
+    :param num: integer number
+    :return: boolean type
+    """
+    if num >= 2:
+        i = 2
+        #while i < (int(my_pow(num, 0.5)) + 1):
+        while i*i < num+1:
+            if num % i == 0:
+                return False
+            i = i + 1
+    else:
+        return False
+    return True
 
 
-# prime number
-
-numbers = input("Input first second number : ").split(',')
+#print(my_pow(2, 9))
+numbers = input("Input number : ").split()  # ex) 900 1000
 n1 = int(numbers[0])
 n2 = int(numbers[1])
+
 if n1 > n2:
     n1, n2 = n2, n1
-while n1 <= n2:
-    is_prime = True
 
-    if n1 < 2:
-        pass
-    else:
-        i = 2
-        while i < int(my_pow(n1,0.5)+1):
-            if n1 % i == 0:
-                is_prime = False
-                break
-            i = i +1
-        if is_prime: print(n1, end=' ')
-    n1 = n1 + 1
-
-
-
-
-
+j = n1
+while j <= n2:
+    if is_prime(j):
+        print(j, end=' ')
+    j = j + 1
