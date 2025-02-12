@@ -10,6 +10,11 @@ def my_pow(b, e) -> float:
     :param e: exponent
     :return: the power result in the form of a real number
     """
+    if e < 0:
+        b = 1 / b
+        e = e * -1
+
+
     result = 1
 
     i = int(e)
