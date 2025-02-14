@@ -1,21 +1,4 @@
-def cl(n):
-    for i in range(n, -1, -1):
-        if i == 0:
-            print("펑~!")
-        else:
-            print(i)
+# 상속 heritage
 
-def cr(n):
-    if n < 0:
-        return
-    elif n == 0 :
-        print("펑~!")
-    else:
-        print(n)
-    cr(n-1)
-
-
-
-s = int(input())
-cl(s)
-cr(s)
+# 강한 연결 관계 : composition (핸드폰안에 부품)
+# 약한 연결 괸계 : aggregation (컴퓨터와 키보드) / 연관 관계
