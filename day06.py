@@ -1,19 +1,77 @@
+#v4.0 guess number 예제를 자동화하고 로그파일(guess.txt)를 남기도록 코드를 수정하시오.
+#단, 해당 프로그램이 로그시간을 갖도록 한다.
+
+# import random
+#
+#
+#
+# def guessNumber(low, high, chance):
+#     mid = (high + low) // 2
+#
+#
+#
+#
+# low = 1
+# high = 100
+#
+# answer = random.randint(low, high)
+# chance = 7
+#
+#
+# with open('guess.txt', 'w') as fp:
+#     while chance != 0:
+#         guess = guessNumber(low, high, chance)
+#         fp.write(f"Input guess number : {guess}\n")
+#         if guess == answer:
+#             print(f'You win. Answer is {answer}')
+#             fp.write(f"You win. Answer is {guess}\n")
+#             break
+#         elif guess > answer:
+#             chance = chance - 1
+#             print(f'{guess} is bigger. Chance left : {chance}')
+#             fp.write(f'{guess} is bigger. Chance left : {chance}\n')
+#         else:
+#             chance = chance - 1
+#             print(f'{guess} is lower. Chance left : {chance}')
+#             fp.write(f'{guess} is lower. Chance left : {chance}\n')
+#     else:
+#         print(f'You lost. Answer is {answer}')
+#         fp.write(f"You lost. Answer is {guess}\n")
+
+# Assignment day06
+# v1.5) https://github.com/inhadeepblue/2024_KEB_datastructure_algorithm 의
+# v0.7 guess number 예제를 자동화하고 로그파일(guess.txt)을 남기도록 코드를 수정하시오.
+# 단, 해당 프로그램이 로그시간을 갖도록 한다
 import random
 
-answer = random.randint(1, 100)
-chance = 7
-
-while chance != 0:
-    guess = int(input("Input guess number : "))
-    if guess == answer:
-        print(f'You win. Answer is {answer}')
-        break
-    elif guess > answer:
-        chance = chance - 1
-        print(f'{guess} is bigger. Chance left : {chance}')
+def guess_number(low, high, answer, chance) -> int:
+    mid =  (low+high) // 2
+    print(f'Guess number is {mid}')
+    fp.write(f'Guess number is {mid}\n')
+    while chance != 0:
+        if mid == answer:
+            print(f'You win. Answer is {answer}')
+            fp.write(f'You win. Answer is {answer}\n')
+            return
+        elif mid > answer:
+            chance = chance - 1
+            print(f'{mid} is bigger. Chance left : {chance}')
+            fp.write(f'{mid} is bigger. Chance left : {chance}\n')
+            return guess_number(low, mid-1, answer, chance)
+        else:
+            chance = chance - 1
+            print(f'{mid} is lower. Chance left : {chance}')
+            fp.write(f'{mid} is lower. Chance left : {chance}\n')
+            return guess_number(mid+1, high, answer, chance)
     else:
-        chance = chance - 1
-        print(f'{guess} is lower. Chance left : {chance}')
-else:
-    print(f'You lost. Answer is {answer}')
+        print(f'You lost. Answer is {answer}')
+        fp.write(f'You lost. Answer is {answer}')
 
+
+if __name__ == "__main__":
+    low = 1
+    high = 100
+    chance = 7
+    answer = random.randint(low, high)
+    with open('guess.txt', 'w') as fp:
+        guess_number(low, high, answer, chance)
