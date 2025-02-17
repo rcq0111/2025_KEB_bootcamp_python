@@ -31,7 +31,7 @@ tx = [20, 7 , 2, 0]
 #     print(calculation_poly(int(input("x 값 : ")), fx, tx))
 
 memo = dict()
-
+# 재귀의 장점 : 간결함
 def fibonacci_recursion(n) -> int:
     """
     피보나치 수 계산함수 (재귀함수 버전)
@@ -43,7 +43,7 @@ def fibonacci_recursion(n) -> int:
     elif n == 1:
         return 1
     else:
-        return fibonacci_recursion(n - 2) + fibonacci_recursion(n - 1)
+        return fibonacci_recursion(n - 2) + fibonacci_recursion(n - 1) # 재귀 함수에서는 side effect가 발생할 확률이 0이다
 
 def fibonacci_recursion_dp(n) -> int:
     """
