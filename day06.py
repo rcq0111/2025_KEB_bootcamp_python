@@ -1,23 +1,17 @@
-def is_even(n) -> bool :
+def dec_oct (n):
     """
-    짝수 판정 함수
-    :param n: 판정할 정수
-    :return: 짝수면 True, 홀수면 False
+    10진수를 8진수로 바꾸는 함수
+    :param n: 변환될 숫자
+    :return: 8진수
     """
-    return not n & 1
-    # if n % 2 == 0 :
-    #     return True
-    # return  False
+    if n == 0 :
+        return ""
+    else:
+        return dec_oct(n // 8) + str(n % 8)
 
+    # return oct(n)
+
+
+print("숫자를 입력하시오 : ", end='')
 n = int(input())
-print(is_even(n))
-
-# print(not 1) # False
-# print(not 0) # True
-
-# a = 10 # 0000 1010
-# b = 11 # 0000 1011 & -> 0000 1010
-# # bit operation
-# print(a & b)
-# print(a | b) # | -> 0000 1011
-# print(a ^ b) # ^ -> 0000 0001 exclusiveOr
+print(dec_oct(n))
