@@ -1,17 +1,13 @@
-def dec_oct (n):
-    """
-    10진수를 8진수로 바꾸는 함수
-    :param n: 변환될 숫자
-    :return: 8진수
-    """
-    if n == 0 :
-        return ""
-    else:
-        return dec_oct(n // 8) + str(n % 8)
-
-    # return oct(n)
-
+def sum(n):
+    # if  n == 0:
+    #     return 0
+    # else:
+    #     return sum(n - 1) + n
+    temp = 0
+    for i in range(n+1):
+        temp = temp + i
+    return temp
 
 print("숫자를 입력하시오 : ", end='')
 n = int(input())
-print(dec_oct(n))
+print(sum(n))
