@@ -8,5 +8,12 @@ def is_even(n) -> bool :
         return True
     return  False
 
-n = int(input())
-print(is_even(n))
+# n = int(input())
+# print(is_even(n))
+
+a = 10 # 0000 1010
+b = 11 # 0000 1011 & -> 0000 1010
+# bit operation
+print(a & b)
+print(a | b) # | -> 0000 1011
+print(a ^ b) # ^ -> 0000 0001 exclusiveOr
