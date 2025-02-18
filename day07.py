@@ -1,3 +1,5 @@
+# Queue 모듈러 % v4.9
+
 def is_queue_full() :
     global size, queue, front, rear
     if (rear + 1) % size == front: # 여기가 핵심
