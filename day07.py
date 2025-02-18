@@ -1,44 +1,27 @@
-
-class Node:
-    def __init__(self, data, next=None):
-        self.data = data
-        self.net = next
-
 class Queue:
     def __init__(self):
-        self.front = None
-        self.rear = None
-        self._size = 0
+        self.s1 = []
+        self.s2 = []
 
-    def enqueue(self, data): # enqueue 를 하면  rear가 증가한다
-        self._size += 1
-        node = Node(data)
-        if self.rear is None:
-            self.front = node
-            self.rear = node
-        else:
-            self.rear.next = node
-            self.rear = node # increase rear
+    def enqueue(self, data):
+        while len(self.s1) != 0:
+            self.s2.append(self.s1.pop())
+        self.s1.append(data)
+        while len(self.s2) != 0:
+            self.s1.append(self.s2.pop())
 
-    def dequeue(self): # dequeue를 하면 front가 증가한다.
-        if self.front is None:
-            raise IndexError('pop from empty queue')
-        self._size  -= self._size
-        temp = self.front # backup / return 용도
-        self.front = self.front.next # update
-        if self.front is None:
-            self.rear = None
-        return temp.data
-
-    def size(self):
-        return self._size
+    def dequeue(self):
+        if len(self.s1) == 0:
+            raise Exception("Cannot pop from empty queue")
+        return self.s1.pop()
 
 if __name__ == "__main__":
     q = Queue()
-    #q.enqueue(7)
-    #q.enqueue(-11)
-    #q.enqueue(8)
-    print(q.size())
+    q.enqueue(7)
+    q.enqueue(-11)
+    q.enqueue(8)
+    for _ in range(4):
+        q.dequeue()
     #print(q.dequeue())
 
 
