@@ -5,6 +5,61 @@ class TreeNode:
 		self.data = None
 		self.right = None
 
+
+def delete(deleteName, root):
+    current = root
+    parent = None
+    while True:
+        if deleteName == current.data:
+            if current.left is None and current.right is None:
+                if parent.left == current:
+                    parent.left = None
+                    print(f"{deleteName}이(가) 삭제 되었습니다.")
+                else:
+                    parent.right = None
+                    print(f"{deleteName}이(가) 삭제 되었습니다.")
+                del (current)
+            elif current.left is not None and current.right is None:
+                if parent.left == current:
+                    parent.left = current.left
+                    print(f"{deleteName}이(가) 삭제 되었습니다.")
+                else:
+                    parent.right = current.left
+                    print(f"{deleteName}이(가) 삭제 되었습니다.")
+            elif current.left is None and current.right is not None:
+                if parent.left == current:
+                    parent.left = current.right
+                    print(f"{deleteName}이(가) 삭제 되었습니다.")
+                else:
+                    parent.right = current.right
+                    print(f"{deleteName}이(가) 삭제 되었습니다.")
+            else:  # 자식이 두 개 있는 경우
+                current.data = search_delete_node(current, current.right)
+                print(f"{deleteName}이(가) 삭제 되었습니다.")
+            break
+        elif deleteName < current.data:
+            if current.left is None:
+                print(f"{deleteName}이(가) 트리에 없음")
+                break
+            parent = current
+            current = current.left
+        else:
+            if current.right is None:
+                print(f"{deleteName}이(가) 트리에 없음")
+                break
+            parent = current
+            current = current.right
+
+
+def search_delete_node(parent, current):
+    if current.left is None:
+        data = current.data
+        delete(current.data, parent)
+        return data
+    else:
+        return search_delete_node(current, current.left)
+
+
 if __name__ == "__main__":
     groups = ['블랙핑크', '레드벨벳', '마마무', '에이핑크', '걸스데이', '트와이스']
     #groups = [10, 15 ,8, 3, 9]
@@ -38,79 +93,7 @@ if __name__ == "__main__":
     current = root
     deleteName = input()
 
-    while True:
-        if deleteName == current.data:
-
-            if current.left == None and current.right == None:
-                if parent.left == current:
-                    parent.left = None
-                    print(f"{deleteName}이(가) 삭제 되었습니다.")
-                    break
-                else:
-                    parent.right = None
-                    print(f"{deleteName}이(가) 삭제 되었습니다.")
-                    break
-
-            elif current.left != None and current.right == None:
-                if parent.left == current:
-                    parent.left = current.left
-                    print(f"{deleteName}이(가) 삭제 되었습니다.")
-                    break
-                else:
-                    parent.right = current.left
-                    print(f"{deleteName}이(가) 삭제 되었습니다.")
-                    break
-
-            elif current.left == None and current.right != None:
-                if parent.left == current:
-                    parent.left = current.right
-                    print(f"{deleteName}이(가) 삭제 되었습니다.")
-                    break
-                else:
-                    parent.right = current.right
-                    print(f"{deleteName}이(가) 삭제 되었습니다.")
-                    break
-
-            else:
-                if parent.left == current:
-                    parent.left = current.left
-                    while True:
-                        if parent.right == None:
-                            parent.right = current.right
-                            print("!")
-                            break
-                        else:
-                            parent = parent.right
-                    print(f"{deleteName}이(가) 삭제 되었습니다.")
-                    break
-                else:
-                    parent.right = current.right
-                    while True:
-                        if parent.left == None:
-                            parent.left = current.left
-                            print("!")
-                            break
-                        else:
-                            parent = parent.left
-                    print(f"{deleteName}이(가) 삭제 되었습니다.")
-                    break
-
-
-
-
-
-        elif deleteName < current.data:
-            if current.left == None:
-                print(f"{deleteName}이(가) 트리에 없음")
-                break
-            parent = current
-            current = current.left
-        else:
-            if current.right == None:
-                print(f"{deleteName}이(가) 트리에 없음")
-                break
-            parent = current
-            current = current.right
+    delete(deleteName, root)
 
 
     find_group = input()
