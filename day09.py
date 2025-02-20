@@ -16,38 +16,55 @@ def print_graph(g) :
         print()
     print()
 
-def find_vertex_recursion():
 
+def find_vertex_recursion(g, current, find_vtx, visited):
+	# visited[current] = 1
+	# print(chr(ord('A') + current), end=' ')
+	visited.append(current)
 
-
-def find_vertex(g, find_vtx) -> bool:
-	stack = []
-	visited_ary = []
-
-	current = 0
-	stack.append(current)
-	visited_ary.append(current)
-
-	while len(stack) != 0:
-		next = None
-		for vertex in range(g_size) :
-			if g.graph[current][vertex] != 0 :
-				if vertex in visited_ary :
-					pass
-				else:
-					next = vertex
-					break
-		if next is not None:
-			current = next
-			stack.append(current)
-			visited_ary.append(current)
-		else :
-			current = stack.pop()
-	if find_vtx in visited_ary :
+	if current == find_vtx:
 		return True
-	else :
-		return False
 
+	for vertex in range(g.SIZE):
+		if g.graph[current][vertex] != 0 and vertex not in visited:
+			if find_vertex_recursion(g, vertex, find_vtx, visited):
+				return True
+	return True
+
+def find_vertex(g, find_vtx):
+	visited = []
+	return find_vertex_recursion(g, 0, find_vtx, visited)
+
+
+
+# def find_vertex(g, find_vtx) -> bool:
+# 	stack = []
+# 	visited_ary = []
+#
+# 	current = 0
+# 	stack.append(current)
+# 	visited_ary.append(current)
+#
+# 	while len(stack) != 0:
+# 		next = None
+# 		for vertex in range(g_size) :
+# 			if g.graph[current][vertex] != 0 :
+# 				if vertex in visited_ary :
+# 					pass
+# 				else:
+# 					next = vertex
+# 					break
+# 		if next is not None:
+# 			current = next
+# 			stack.append(current)
+# 			visited_ary.append(current)
+# 		else :
+# 			current = stack.pop()
+# 	if find_vtx in visited_ary :
+# 		return True
+# 	else :
+# 		return False
+#
 
 G1 = None
 name_ary = ['춘천', '서울', '속초', '대전', '광주', '부산']
