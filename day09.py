@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Graph:
 	def __init__(self, size) :
 		self.SIZE = size
@@ -17,23 +20,42 @@ def print_graph(g) :
     print()
 
 
-def find_vertex_recursion(g, current, find_vtx, visited):
-	# visited[current] = 1
-	# print(chr(ord('A') + current), end=' ')
-	visited.append(current)
+def bfs(g, current, find_vtx, visited):
+    queue = deque([current])
+    #visited[current] = 1
+    visited.append(current)
 
-	if current == find_vtx:
-		return True
+    if current == find_vtx:
+        return True
 
-	for vertex in range(g.SIZE):
-		if g.graph[current][vertex] != 0 and vertex not in visited:
-			if find_vertex_recursion(g, vertex, find_vtx, visited):
-				return True
-	return True
+    while queue:
+        current = queue.popleft()  # dequeue
+        # print(chr(ord('A') + i), end=' ')
+        for vertex in range(g.SIZE):
+            if g.graph[current][vertex] != 0 and vertex not in visited:
+                queue.append(vertex)  # inqueue
+                #visited[vertex] = 1
+                visited.append(vertex)
+
+    return True
+
+# def find_vertex_recursion(g, current, find_vtx, visited):
+# 	# visited[current] = 1
+# 	# print(chr(ord('A') + current), end=' ')
+# 	visited.append(current)
+#
+# 	if current == find_vtx:
+# 		return True
+#
+# 	for vertex in range(g.SIZE):
+# 		if g.graph[current][vertex] != 0 and vertex not in visited:
+# 			if find_vertex_recursion(g, vertex, find_vtx, visited):
+# 				return True
+# 	return True
 
 def find_vertex(g, find_vtx):
 	visited = []
-	return find_vertex_recursion(g, 0, find_vtx, visited)
+	return bfs(g, 0, find_vtx, visited)
 
 
 
