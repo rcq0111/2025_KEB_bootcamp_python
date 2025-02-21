@@ -1,3 +1,13 @@
+def insertion_sort(l):
+    for i in range(1, len(l)):
+        value = l[i]
+        while i > 0 and l[i - 1] > value:
+            l[i] = l[i - 1]
+            i = i - 1
+            print(i, end=' ')
+        l[i] = value
+    return l
+
 def bubble_sort(l):
     for i in range(len(l) - 1):
         no_swap = True
@@ -10,4 +20,5 @@ def bubble_sort(l):
             return l
     return l
 
-print(bubble_sort([33, 8, -11, 9, 1]))
+#print(bubble_sort([33, 8, -11, 9, 1]))
+print(insertion_sort([33, 8, -11, 9, 1]))
