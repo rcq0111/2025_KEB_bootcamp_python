@@ -16,15 +16,17 @@ def quick_sort(l):
         return l
 
     pivot = l[n // 2]
-    left, right = list(), list()
+    left, mid, right = list(), list(), list()
 
     for i in l:
         if i < pivot:
             left.append(i)
         elif i > pivot:
             right.append(i)
+        else:
+            mid.append(i)
 
-    return quick_sort(left) + [pivot] + quick_sort(right)
+    return quick_sort(left) + mid + quick_sort(right)
 
 @time_decorator
 def insertion_sort(l):
@@ -52,15 +54,21 @@ def bubble_sort(l):
 
 
 
-lists1 = [random.randint(1, 10000) for _ in range(1000)]
-lists2 = lists1.copy()
-lists3 = lists1.copy()
-bubble_sort(lists1)
-insertion_sort(lists2)
-s = time.time()
-quick_sort(lists3)
-e = time.time()
-print(f'실행시간 : {e - s}초')
+lists = [4, 55, 55, 7, 9, 55]
+sorted_list = quick_sort(lists)
+print(sorted_list)
+
+# lists1 = [random.randint(1, 10000) for _ in range(1000)]
+# lists2 = lists1.copy()
+# lists3 = lists1.copy()
+# bubble_sort(lists1)
+# insertion_sort(lists2)
+# s = time.time()
+# quick_sort(lists3)
+# e = time.time()
+# print(f'실행시간 : {e - s}초')
+
+
 # print(bubble_sort([33, 8, -11, 9, 1]))
 # print(bubble_sort([13, 15, 20, 99, 100]))
 # print(insertion_sort([33, 8, -11, 9, 1]))
